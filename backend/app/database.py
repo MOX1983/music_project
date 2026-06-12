@@ -1,11 +1,9 @@
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
-from sqlalchemy import MetaData
 
 from app.config import settings
 
 
-metadata = MetaData()
 engine = create_async_engine(url=settings.get_database_url(), echo=True)
 
 async_session_factory = async_sessionmaker(engine, class_=AsyncSession)

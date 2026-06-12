@@ -1,9 +1,8 @@
-import app.models.users_tracks
 from app.database import Base
 
-# from app.models.users_tracks import users_tracks
+from app.models.users_tracks import users_tracks
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Time
 from sqlalchemy.orm import relationship
 
 class Track(Base):
@@ -13,6 +12,9 @@ class Track(Base):
     title = Column(String, nullable=False)
     author = Column(String, nullable=False)
     path_file = Column(String, nullable=False)
+    duration = Column(Time, nullable=False)
+    category = Column(String)
+    picture = Column(String)
 
-    # users = relationship("User", secondary='app.models.users_tracks.users_tracks', back_populates="tracks")
+    users = relationship("User", secondary=users_tracks, back_populates="tracks")
 

@@ -9,13 +9,15 @@ create table tracks(
 	track_id serial primary key,
 	title varchar(255) not null,
 	author varchar(255) not null,
-	path_file varchar(255) not null
+	path_file varchar(255) not null,
+	duration time not null,
+	category varchar(255),
+	picture varchar(255)
 );
 
 create table users_tracks(
 	user_id int,
 	track_id int,
-	primary key (user_id, track_id),
 	foreign key (user_id) references users(user_id) 
 		on delete cascade 
 		on update cascade,
