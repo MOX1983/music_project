@@ -29,14 +29,35 @@ create table users_tracks(
 insert into users(login, email, password_hash)
 values('admin', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 
+insert into tracks(title, author, path_file, duration) 
+values ('test_mus23gdfg d 23', 'mox lox', '/test/path', '00:03:50');
+
+insert into users_tracks(user_id, track_id)
+values (1, 2), (1, 3), (1, 4);
+
 
 select *
 from users;
 
+select *
+from tracks;
+
+select *
+from users_tracks;
+
+select ut.user_id, ut.track_id , t.title, t.author, t.path_file
+from users_tracks ut
+left join tracks t on ut.track_id = t.track_id
+where ut.user_id = 1;
+
+select ut.user_id, ut.track_id, t.title, t.author, t.path_file
+from users_tracks ut
+left join tracks t on ut.track_id = t.track_id
+where ut.user_id = 1 and ut.track_id = 2;
+
+
 delete from users 
 where user_id = 7;
-
-
 
 
 

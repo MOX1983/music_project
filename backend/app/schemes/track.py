@@ -5,4 +5,8 @@ class TrackBase(BaseModel):
     author: str = Field(max_length=255, alias="author")
     path_file: str = Field(max_length=255, alias="path_file")
 
+class Track(TrackBase):
+    user_id: int
+    track_id: int
+
     model_config = ConfigDict(from_attributes=True)

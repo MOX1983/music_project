@@ -9,6 +9,8 @@ from fastapi.security import OAuth2PasswordRequestForm
 from app.schemes.user import UserBase
 from app.repositories import (create_user as create_user_repo, find_user_by_email, login_user as login_user_repo,
                               create_user_token, get_current_user, oauth2_scheme)
+from app.models import User
+from app.repositories import get_user_tracks, get_user_one_track
 
 app = FastAPI()
 
@@ -49,3 +51,8 @@ async def get_me(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends
         "login": current_user.login,
         "email": current_user.email
     }
+
+
+@app.get("/me/tracks")
+async def get_tracks(user: User, db: AsyncSession = Depends(get_session)):
+    result = await get_user_tracks(db, user)
