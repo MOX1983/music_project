@@ -1,8 +1,9 @@
 from app.database import Base
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import Column, Integer, ForeignKey, Table
 
-class users_tracks(Base):
-    __tablename__ = 'tracks'
-
-    user_id = Column(Integer, ForeignKey('users.user_id'), primary_key=True)
-    track_id = Column(Integer, ForeignKey('tracks.track_id'), primary_key=True)
+users_tracks = Table(
+    'users_tracks',
+    Base.metadata,
+    Column('user_id', Integer, ForeignKey('users.user_id'), primary_key=True),
+    Column('track_id', Integer, ForeignKey('tracks.track_id'), primary_key=True)
+)

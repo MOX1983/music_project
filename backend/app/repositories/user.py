@@ -11,7 +11,7 @@ from jose import JWTError, jwt
 from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
-from app.schemes.user import UserBase
+from app.schemes.user import UserBase, UserResponse
 from app.models.user import User
 
 load_dotenv()
@@ -34,7 +34,7 @@ async def find_user_by_email(db: AsyncSession, email: str) -> User | None:
     result = await db.execute(statement)
     return result.scalars().first()
 
-async def find_user_by_login(db: AsyncSession, login: str) -> UserBase | None:
+async def find_user_by_login(db: AsyncSession, login: str) -> UserResponse | None:
     statement = select(User).where(User.login == login)
     result = await db.execute(statement)
     return result.scalars().first()
@@ -73,7 +73,7 @@ async def verify_token(token: str) -> str | None:
         return None
 
 
-async def get_current_user(token: str, db: AsyncSession) -> UserBase:
+async def get_current_user(token: str, db: AsyncSession) -> UserResponse:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Не удалось проверить учетные данные",

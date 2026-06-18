@@ -1,12 +1,8 @@
-from email.header import Header
-from typing import Dict, Optional
-
 from fastapi import FastAPI, Depends, HTTPException
 from app.database import async_session_factory
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi.security import OAuth2PasswordRequestForm
 
-from app.schemes.user import UserBase
+from app.schemes import UserBase
 from app.repositories import (create_user as create_user_repo, find_user_by_email, login_user as login_user_repo,
                               create_user_token, get_current_user, oauth2_scheme)
 from app.models import User
@@ -54,5 +50,7 @@ async def get_me(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends
 
 
 @app.get("/me/tracks")
-async def get_tracks(user: User, db: AsyncSession = Depends(get_session)):
-    result = await get_user_tracks(db, user)
+async def get_tracks(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_session)):
+    current_user = await get_current_user(token, db)
+    result = await get_user_tracks(db, current_user)
+    return {"user": current_user.user_id, "tracks": result}

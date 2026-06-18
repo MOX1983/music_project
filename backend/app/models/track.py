@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 
 class Track(Base):
     __tablename__ = 'tracks'
+    __table_args__ = {'extend_existing': True}
 
     track_id = Column(Integer, primary_key=True)
     title = Column(String, nullable=False)

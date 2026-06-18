@@ -1,2 +1,2 @@
-from app.schemes.user import UserBase
-from app.schemes.track import TrackBase, Track
+from app.schemes.user import UserBase, UserResponse
+from app.schemes.track import TrackBase, TrackResponse
