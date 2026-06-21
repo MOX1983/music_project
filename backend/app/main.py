@@ -54,3 +54,9 @@ async def get_tracks(token: str = Depends(oauth2_scheme), db: AsyncSession = Dep
     current_user = await get_current_user(token, db)
     result = await get_user_tracks(db, current_user)
     return {"user": current_user.user_id, "tracks": result}
+
+@app.get("/me/track")
+async def get_tracks(title: str, token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_session)):
+    current_user = await get_current_user(token, db)
+    result = await get_user_one_track(db, current_user, title)
+    return {"user": current_user.user_id, "track": result}

@@ -33,7 +33,7 @@ insert into tracks(title, author, path_file, duration)
 values ('test_mus23gdfg d 23', 'mox lox', '/test/path', '00:03:50');
 
 insert into users_tracks(user_id, track_id)
-values (1, 2), (1, 3), (1, 4);
+values (4, 2), (4, 3), (4, 4);
 
 
 select *
