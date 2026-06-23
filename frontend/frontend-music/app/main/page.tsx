@@ -15,7 +15,7 @@ export default function Main(){
       </div>
       <div className="main-panel">
 
-        {/* не знаю как вызывать компоненты с пропсами ))) */}
+        
         <Track title="sd"></Track>
         
       </div>

@@ -1,7 +1,8 @@
 import icon from "../../public/img/Icon.svg";
 import plug from "../../public/img/cat.jpg";
 
-export default function Track(props) {
+
+export default function Track({title: string, img : string}) {
   return (
     <button className="componrnt">
       <div className="body-comp">
