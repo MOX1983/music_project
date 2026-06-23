@@ -1,0 +1,16 @@
+.mainBody{
+    display: flex;
+    flex: 1;
+    margin-top: 140px;
+    margin-bottom: 80px; 
+    min-height: calc(100vh - 220px); 
+}
+
+
+.body{
+    background: var(--bg-color); 
+    display: flex;
+    justify-content: left;  
+    flex-direction: column;
+    min-height: 100vh;
+}
