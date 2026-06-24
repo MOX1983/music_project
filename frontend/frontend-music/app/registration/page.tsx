@@ -1,4 +1,5 @@
 import styles from "../../styles/styles.module.css" 
+import Link from "next/link"
 
 export default function Registration(){
     return <div className={styles.body}>
@@ -8,7 +9,7 @@ export default function Registration(){
             <input type="text" placeholder="email"></input>
             <input type="text" placeholder="password"></input>
             <button>Registration</button>
-            <a href="/">LOGIN</a>
+            <Link href={"/login"}>LOGIN</Link>
         </div>
     </div>
 }
