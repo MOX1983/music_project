@@ -2,7 +2,8 @@ create table users (
 	user_id serial primary key, 
 	login varchar(50) not null unique,
 	email varchar(255) not null unique,
-	password_hash varchar(255) not null
+	password_hash varchar(255) not null,
+	photo varchar(255)
 );
 
 create table tracks(
@@ -26,11 +27,13 @@ create table users_tracks(
 		on update cascade
 );
 
-insert into users(login, email, password_hash)
-values('admin', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+insert into users(login, email, password_hash, photo)
+values('admin', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'cat.jpg' );
 
-insert into tracks(title, author, path_file, duration) 
-values ('test_mus23gdfg d 23', 'mox lox', '/test/path', '00:03:50');
+insert into tracks(title, author, path_file, duration, picture) 
+values ('НАЙТИ СЕБЯ', 'SUTKI, ДЛЯ ДУР', 'tmp6r6876fb.mp3', '02:08', 'cat.jpg'),
+('This Fire', 'Franz Ferdinand', 'Franz_Ferdinant-This_fire.mp3', '04:14', 'cat.jpg'),
+('Обнял, поцеловал', 'Whole Lotta Swag', '-2001704121_148704121_8996afef-c23.mp3', '02:38', 'photo_2026-04-10_21-41-02.jpg');
 
 insert into users_tracks(user_id, track_id)
 values (4, 2), (4, 3), (4, 4);
