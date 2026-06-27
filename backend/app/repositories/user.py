@@ -4,14 +4,13 @@ from sqlalchemy import select
 import os
 import bcrypt
 from dotenv import load_dotenv
-from typing import Dict
 
 from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
 from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
-from app.schemes.user import UserBase, UserResponse
+from app.schemes.user import UserBase, UserResponse, UserAll
 from app.models.user import User
 
 load_dotenv()
@@ -34,7 +33,7 @@ async def find_user_by_email(db: AsyncSession, email: str) -> User | None:
     result = await db.execute(statement)
     return result.scalars().first()
 
-async def find_user_by_login(db: AsyncSession, login: str) -> UserResponse | None:
+async def find_user_by_login(db: AsyncSession, login: str) -> UserAll | None:
     statement = select(User).where(User.login == login)
     result = await db.execute(statement)
     return result.scalars().first()
@@ -73,7 +72,7 @@ async def verify_token(token: str) -> str | None:
         return None
 
 
-async def get_current_user(token: str, db: AsyncSession) -> UserResponse:
+async def get_current_user(token: str, db: AsyncSession) -> UserAll:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Не удалось проверить учетные данные",

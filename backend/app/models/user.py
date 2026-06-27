@@ -12,6 +12,6 @@ class User(Base):
     login = Column(String, nullable=False, unique=True)
     email = Column(String, nullable=False, unique=True)
     password_hash = Column(String, nullable=False)
-    picture = Column(String)
+    photo = Column(String)
 
     tracks = relationship("Track", secondary=users_tracks, back_populates="users")
