@@ -28,7 +28,7 @@ create table users_tracks(
 );
 
 insert into users(login, email, password_hash, photo)
-values('admin', 'admin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'cat.jpg' );
+values('admin', 'admin@gmail.com', 'e7e50bf29236bc06836d573b43514a24cec854a71ca4fbd454c0b9c1a2b91df4', 'cat.jpg' ); --admin678
 
 insert into tracks(title, author, path_file, duration, picture) 
 values ('НАЙТИ СЕБЯ', 'SUTKI, ДЛЯ ДУР', 'tmp6r6876fb.mp3', '02:08', 'cat.jpg'),
