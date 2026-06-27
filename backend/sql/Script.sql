@@ -32,7 +32,7 @@ create table users_tracks(
 
 update users 
 set photo = 'cat.jpg'
-where id = 1; --admin678
+where user_id = 1; --admin678
 
 insert into tracks(title, author, path_file, duration, picture) 
 values ('НАЙТИ СЕБЯ', 'SUTKI, ДЛЯ ДУР', 'tmp6r6876fb.mp3', '02:08', 'cat.jpg'),
