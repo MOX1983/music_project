@@ -27,8 +27,12 @@ create table users_tracks(
 		on update cascade
 );
 
-insert into users(login, email, password_hash, photo)
-values('admin', 'admin@gmail.com', 'e7e50bf29236bc06836d573b43514a24cec854a71ca4fbd454c0b9c1a2b91df4', 'cat.jpg' ); --admin678
+--insert into users(login, email, password_hash, photo)
+--values('admin', 'admin@gmail.com', 'e7e50bf29236bc06836d573b43514a24cec854a71ca4fbd454c0b9c1a2b91df4', 'cat.jpg' ); 
+
+update users 
+set photo = 'cat.jpg'
+where id = 1; --admin678
 
 insert into tracks(title, author, path_file, duration, picture) 
 values ('НАЙТИ СЕБЯ', 'SUTKI, ДЛЯ ДУР', 'tmp6r6876fb.mp3', '02:08', 'cat.jpg'),
