@@ -3,7 +3,7 @@ from typing import Sequence
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, join, and_
 
-from app.schemes import UserResponse, TrackResponse as TrackSchema
+from app.schemes import UserResponse, TrackAll as TrackSchema
 from app.models import User, Track
 
 async def get_user_tracks(db: AsyncSession, user: UserResponse) -> list[TrackSchema]:

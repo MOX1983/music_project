@@ -77,7 +77,8 @@ async def get_me_tracks(token: str = Depends(oauth2_scheme), db: AsyncSession = 
             "id": track.track_id,
             "title": track.title,
             "author": track.author,
-            "file_url": f"/mp3/{track.path_file}"
+            "path_file": f"/mp3/{track.path_file}",
+            "picture": track.picture
         }
         for track in result
     ]}
@@ -91,7 +92,8 @@ async def get_me_tracks(title: str, token: str = Depends(oauth2_scheme), db: Asy
             "id": track.track_id,
             "title": track.title,
             "author": track.author,
-            "file_url": f"/mp3/{track.path_file}"
+            "path_file": f"/mp3/{track.path_file}",
+            "picture": track.picture
         }}
 
 @app.get("/tracks")
@@ -102,7 +104,8 @@ async def get_tracks(db: AsyncSession = Depends(get_session)):
             "id": track.track_id,
             "title": track.title,
             "author": track.author,
-            "file_url": f"/mp3/{track.path_file}"
+            "path_file": f"/mp3/{track.path_file}",
+            "picture": track.picture
         }
         for track in result
     ]
@@ -114,5 +117,6 @@ async def get_me_tracks(title: str, db: AsyncSession = Depends(get_session)):
             "id": track.track_id,
             "title": track.title,
             "author": track.author,
-            "file_url": f"/mp3/{track.path_file}"
+            "path_file": f"/mp3/{track.path_file}",
+            "picture": track.picture
         }

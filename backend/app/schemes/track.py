@@ -10,3 +10,7 @@ class TrackResponse(TrackBase):
     track_id: int
 
     model_config = ConfigDict(from_attributes=True)
+
+class TrackAll(TrackResponse):
+    picture: str
+    model_config = ConfigDict(from_attributes=True)

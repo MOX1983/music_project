@@ -22,6 +22,8 @@ export default function Track({
   duration,
   onTrackClick,
 }: TrackProps) {
+
+
   function handelClick(track_id: number) {
     const trackData = {
       track_id,

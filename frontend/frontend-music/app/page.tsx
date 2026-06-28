@@ -87,12 +87,14 @@ export default function Main() {
     setLastTrack(track);
   };
 
+  const usePhoto = API_URL + '' + user?.photo;
+
   return (
     <div className={styles.body}>
       <header>
         <img
           className="logo"
-          src={user?.photo || plug.src}
+          src={usePhoto || plug.src}
           alt={""}
           width={50}
           height={50}
@@ -108,10 +110,10 @@ export default function Main() {
           {tracks.map((track) => (
             <Track
               track_id={track.track_id}
-              title={track?.title}
-              picture={track.picture}
+              title={track.title}
+              picture={API_URL + '' + track.picture}
               author={track.author}
-              path_file={track.path_file}
+              path_file={API_URL + '' + track.path_file}
               duration={track.duration}
               onTrackClick={handleTrack}
             ></Track>
@@ -133,7 +135,7 @@ export default function Main() {
               <p className="track-title">{lastTrack.title}</p>
               <p className="track-author">{lastTrack.author}</p>
             </div>
-            <audio controls src={`${API_URL}/${lastTrack.path_file}`} />
+            <audio controls src={lastTrack.path_file} />
           </>
         ) : (
           <>
