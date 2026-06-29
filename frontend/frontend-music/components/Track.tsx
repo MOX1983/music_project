@@ -22,8 +22,6 @@ export default function Track({
   duration,
   onTrackClick,
 }: TrackProps) {
-
-
   function handelClick(track_id: number) {
     const trackData = {
       track_id,
@@ -35,15 +33,15 @@ export default function Track({
     };
     localStorage.setItem("lastTrack", JSON.stringify(trackData));
 
-    if(onTrackClick){
+    if (onTrackClick) {
       onTrackClick(trackData);
     }
   }
 
   return (
     <button
-      className="componrnt"
       key={track_id}
+      className="componrnt"
       onClick={() => handelClick(track_id)}
     >
       <div className="body-comp">

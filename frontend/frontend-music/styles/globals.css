@@ -18,7 +18,7 @@
 header{
   display: flex;
   align-items:center;
-  justify-content: start;
+  justify-content: space-between;
   padding: 30px;
   background: var(--header-bg-color);
   gap: clamp(0vw, 20vw, 50vw);
@@ -152,7 +152,6 @@ button{
 a{
   font-size: 14px;
 }
-
 
 
 

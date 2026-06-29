@@ -1,16 +1,30 @@
-.mainBody{
-    display: flex;
-    flex: 1;
-    margin-top: 140px;
-    margin-bottom: 80px; 
-    min-height: calc(100vh - 220px); 
+.mainBody {
+  display: flex;
+  flex: 1;
+  margin-top: 140px;
+  margin-bottom: 80px;
+  min-height: calc(100vh - 220px);
 }
 
+.body {
+  background: var(--bg-color);
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-.body{
-    background: var(--bg-color); 
-    display: flex;
-    justify-content: left;  
-    flex-direction: column;
-    min-height: 100vh;
+.logout {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.logout_ing{
+    width: 20px;
+    height: 20px;
+}
+
+.logout_ing:hover{
+    width: 25px;
+    height: 25px;
 }

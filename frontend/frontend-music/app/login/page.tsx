@@ -16,6 +16,14 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [user, setUser] = useState();
 
+  useEffect(() => {
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+    if(token){
+      router.push('/');
+    }
+  }, [router])
+
   const postLogin = () => {
     try {
       axios
@@ -61,7 +69,7 @@ export default function Login() {
         ></input>
         <input
           id="password"
-          type="text"
+          type="password"
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         ></input>
