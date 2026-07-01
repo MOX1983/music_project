@@ -11,7 +11,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { isDynamicPostpone } from "next/dist/server/app-render/dynamic-rendering";
 
 const API_URL = "http://127.0.0.1:8000";
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Input from "@/components/Input";
 
 const API_URL = "http://127.0.0.1:8000";
 
@@ -51,24 +52,9 @@ export default function Registration() {
     <div className={styles.body}>
       <div className="main">
         <h1>Registration</h1>
-        <input
-          id="login"
-          type="text"
-          placeholder="login"
-          onChange={(e) => setLogin(e.target.value)}
-        ></input>
-        <input
-          id="email"
-          type="text"
-          placeholder="email"
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <input
-          id="password"
-          type="password"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
+          <Input type={"text"} placeholder={"login"} onChange={(e => setLogin(e.target.value))}  ></Input>
+          <Input type={"text"} placeholder={"email"} onChange={(e => setEmail(e.target.value))}  ></Input>
+          <Input type={"text"} placeholder={"password"} onChange={(e => setPassword(e.target.value))}  ></Input>
         <button onClick={postRegistration}>Registration</button>
         <Link href={"/login"}>LOGIN</Link>
       </div>
