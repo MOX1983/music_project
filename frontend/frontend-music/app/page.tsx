@@ -2,42 +2,26 @@
 
 import styles from "./styles.module.css";
 import plug from "../public/img/cat.jpg";
-import logout from "../public/img/Logout.svg";
 import Track from "../components/Track";
-import Search from "@/components/Search";
+import Header from "@/components/Header";
 import Playlist from "../components/Playlist";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {User} from "@/type/user";
+import {Track as TrackType} from "@/type/tracks";
 
 const API_URL = "http://127.0.0.1:8000";
 
-interface User {
-  user_id: number;
-  login: string;
-  email: string;
-  photo?: string;
-}
-
-interface Track {
-  track_id: number;
-  title: string;
-  author: string;
-  path_file: string;
-  duration: string;
-  category?: string;
-  picture?: string;
-}
 
 export default function Main() {
   const router = useRouter();
   const [user, setUsers] = useState<User | null>(null);
   const [isLoading, setLoading] = useState(true);
-  const [tracks, setTracks] = useState<Track[]>([]);
-  const [searchTracks, setSearchTracks] = useState<Track[]>([]);
-  const [lastTrack, setLastTrack] = useState<Track | null>(null);
+  const [tracks, setTracks] = useState<TrackType[]>([]);
+  const [searchTracks, setSearchTracks] = useState<TrackType[]>([]);
+  const [lastTrack, setLastTrack] = useState<TrackType | null>(null);
 
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
@@ -89,61 +73,34 @@ export default function Main() {
     return null;
   }
 
-  const handleTrack = (track: Track) => {
+  const handleTrack = (track: TrackType) => {
     setLastTrack(track);
   };
 
-  const handleExit = () => {
-    if (token) {
-      localStorage.removeItem("token");
-      router.push("/login");
-      setLoading(false);
-      return;
-    }
-  };
-
-  const handleSearch = (filtered: any[]) => {
+  const handleSearch = (filtered: TrackType[]) => {
     setSearchTracks(filtered);
   };
 
-  const usePhoto = API_URL + "" + user?.photo;
+  const userPhoto = API_URL + "" + user?.photo;
 
   return (
     <div className={styles.body}>
-      <header>
-        <img
-          className="logo"
-          src={usePhoto || plug.src}
-          alt={""}
-          width={50}
-          height={50}
-        ></img>
-        <Search tracks={tracks} onChanged={handleSearch}></Search>
-        <button className={styles.logout} onClick={handleExit}>
-          <Image
-            className={styles.logout_ing}
-            src={logout}
-            alt={""}
-            width={20}
-            height={20}
-          ></Image>
-        </button>
-      </header>
+      <Header userPhoto={userPhoto} tracks={tracks} onLoading={() => setLoading(false)} onSearch={handleSearch} ></Header>
       <div className={styles.mainBody}>
         <div className="left-panel">
-          <Playlist name={"name playlist"}></Playlist>
-          <Playlist name={"name playlist"}></Playlist>
+          <Playlist key={1} name={"name playlist"}></Playlist>
+          <Playlist key={2} name={"name playlist"}></Playlist>
         </div>
         <div className="main-panel">
-          {searchTracks.map((track) => (
+          {searchTracks.map(({track_id, title, picture, author, path_file, duration}) => (
             <Track
-              key={track.track_id}
-              track_id={track.track_id}
-              title={track.title}
-              picture={API_URL + "" + track.picture}
-              author={track.author}
-              path_file={API_URL + "" + track.path_file}
-              duration={track.duration}
+              key={track_id}
+              track_id={track_id}
+              title={title}
+              picture={API_URL + "" + picture}
+              author={author}
+              path_file={API_URL + "" + path_file}
+              duration={duration}
               onTrackClick={handleTrack}
             ></Track>
           ))}

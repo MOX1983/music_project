@@ -1,17 +1,8 @@
 import icon from "../public/img/Icon.svg";
 import Image from "next/image";
 import plug from "../public/img/cat.jpg";
+import {TrackProps} from "@/type/tracks";
 
-export interface TrackProps {
-  track_id: number;
-  title: string;
-  author: string;
-  path_file: string;
-  duration: string;
-  category?: string;
-  picture?: string;
-  onTrackClick?: (track: TrackProps) => void;
-}
 
 export default function Track({
   track_id,

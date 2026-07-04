@@ -58,7 +58,7 @@ export default function Login() {
         <h1>LOGIN</h1>
         <Input type={"text"} placeholder={"login"} onChange={(e => setLogin(e.target.value))}  ></Input>
         <Input type={"text"} placeholder={"email"} onChange={(e => setEmail(e.target.value))}  ></Input>
-        <Input type={"text"} placeholder={"password"} onChange={(e => setPassword(e.target.value))}  ></Input>
+        <Input type={"password"} placeholder={"password"} onChange={(e => setPassword(e.target.value))}  ></Input>
         <button id="btnLogin" onClick={postLogin}>
           LOGIN
         </button>

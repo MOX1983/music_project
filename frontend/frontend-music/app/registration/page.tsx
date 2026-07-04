@@ -54,7 +54,7 @@ export default function Registration() {
         <h1>Registration</h1>
           <Input type={"text"} placeholder={"login"} onChange={(e => setLogin(e.target.value))}  ></Input>
           <Input type={"text"} placeholder={"email"} onChange={(e => setEmail(e.target.value))}  ></Input>
-          <Input type={"text"} placeholder={"password"} onChange={(e => setPassword(e.target.value))}  ></Input>
+          <Input type={"password"} placeholder={"password"} onChange={(e => setPassword(e.target.value))}  ></Input>
         <button onClick={postRegistration}>Registration</button>
         <Link href={"/login"}>LOGIN</Link>
       </div>
