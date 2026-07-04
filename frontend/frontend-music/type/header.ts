@@ -1,8 +1,7 @@
-import {Track} from "@/type/tracks";
+import {Track as TrackType} from "@/type/tracks";
 
 export interface Header {
     userPhoto: string;
-    tracks: Track[];
-    onLoading: () => void;
-    onSearch: (filtred: Track[]) => void;
+    tracks: TrackType[] | null;
+    onSearch: (filtered: TrackType[] | null) => void;
 }

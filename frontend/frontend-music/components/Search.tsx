@@ -1,9 +1,5 @@
 import { useState, ChangeEvent  } from "react";
-
-interface SearchProps{
-    tracks: any[],
-    onChanged: (track: any[]) => void;
-}
+import {SearchProps} from "@/type/search"
 
 export default function Search({tracks, onChanged}:SearchProps){
     const [items, setItems] = useState('')
@@ -17,12 +13,12 @@ export default function Search({tracks, onChanged}:SearchProps){
             return;
         }
 
-        const filtered = tracks.filter((track) => {
-            const title = track.title?.toLowerCase();
+        const filtered = tracks?.filter((track) => {
+            const title = track.title.toLowerCase();
             return title.includes(text);
         });
 
-        onChanged(filtered);
+        onChanged(filtered || null);
     }
 
     return (<input onChange={onTextChanged} type="text" placeholder="search" />)

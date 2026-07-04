@@ -4,52 +4,26 @@ import styles from "../../styles/styles.module.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import Input from "@/components/Input";
+import useUsersStore from "@/stores/User";
 
-const API_URL = "http://127.0.0.1:8000";
 
 export default function Login() {
   const router = useRouter();
-  const [isLoading, setLoading] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [user, setUser] = useState();
+
+  const {login : loginAction, isAuthenticated} = useUsersStore();
 
   useEffect(() => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
-    if(token){
+    if(isAuthenticated){
       router.push('/');
     }
-  }, [router])
+  }, [isAuthenticated, router])
 
-  const postLogin = () => {
-    try {
-      axios
-        .post(`${API_URL}/login`, {
-          login: login,
-          password_hash: password,
-          email: email,
-        })
-        .then((response) => response.data)
-        .then((data) => {
-          setUser(data);
-          if (data.access_token) {
-            localStorage.setItem("token", data.access_token);
-          }
-          setLoading(false);
-          router.push("/");
-        })
-        .catch((error) => console.error("Error fetching users:", error));
-
-      if (isLoading) {
-        alert("Error fetching users");
-      }
-    } catch (error: any) {
-      console.error("Ошибка:", error);
-    }
+  const postLogin = async () => {
+    await loginAction(login, email, password);
   };
 
   return (

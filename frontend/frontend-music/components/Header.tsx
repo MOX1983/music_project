@@ -1,28 +1,27 @@
 import plug from "@/public/img/cat.jpg";
-import logout from "@/public/img/Logout.svg";
+import logoutImg from "@/public/img/Logout.svg";
 import Search from "@/components/Search";
 import styles from "@/app/styles.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {Header as HeaderType} from "@/type/header";
 import {Track} from "@/type/tracks";
+import useUsersStore from "@/stores/User";
 
-
-export default function Header({userPhoto, tracks, onLoading, onSearch}: HeaderType ) {
+export default function Header({userPhoto, tracks, onSearch}: HeaderType ) {
 
     const router = useRouter();
+    const {logout, isAuthenticated} = useUsersStore();
 
     const handleExit = () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            localStorage.removeItem("token");
+        if (isAuthenticated) {
+            logout();
             router.push("/login");
-            onLoading();
             return;
         }
     };
 
-    const handleSearch = (filtered: Track[]) => {
+    const handleSearch = (filtered: Track[] | null) => {
         onSearch(filtered);
     };
 
@@ -38,7 +37,7 @@ export default function Header({userPhoto, tracks, onLoading, onSearch}: HeaderT
         <button className={styles.logout} onClick={handleExit}>
             <Image
                 className={styles.logout_ing}
-                src={logout}
+                src={logoutImg}
                 alt={""}
                 width={20}
                 height={20}
