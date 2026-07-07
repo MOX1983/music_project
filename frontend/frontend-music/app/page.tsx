@@ -6,7 +6,6 @@ import Track from "../components/Track";
 import Header from "@/components/Header";
 import Playlist from "../components/Playlist";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import {Track as TrackType} from "../type/tracks";
 import useUsersStore from "@/stores/User";
@@ -15,20 +14,16 @@ import useTrackStore from "@/stores/Track";
 const API_URL = "http://127.0.0.1:8000";
 
 export default function Main() {
-  const router = useRouter();
-  const {isAuthenticated, me, token, user} = useUsersStore();
+  const {me, token} = useUsersStore();
   const {tracks, lastTrack, getLastTrack, getTracks, setLastTrack, searchTracks, displayedTracks} = useTrackStore();
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/login");
-    }
 
     me(token || '');
     getTracks();
     getLastTrack();
 
-  }, [isAuthenticated, token, router]);
+  }, []);
 
 
   const handleTrack = (track: TrackType) => {
@@ -39,11 +34,9 @@ export default function Main() {
     searchTracks(filtered);
   };
 
-  const userPhoto = API_URL + "" + user?.photo;
-
   return (
     <div className={styles.body}>
-      <Header userPhoto={userPhoto} tracks={tracks}  onSearch={handleSearch} ></Header>
+      <Header tracks={tracks}  onSearch={handleSearch} ></Header>
       <div className={styles.mainBody}>
         <div className="left-panel">
           <Playlist key={1} name={"name playlist"}></Playlist>

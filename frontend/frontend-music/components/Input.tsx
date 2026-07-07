@@ -1,7 +1,7 @@
 import {ChangeEvent} from "react";
 
 interface InputProps{
-    type: string,
+    type: "text" |"password",
     placeholder: string;
     onChange: (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => void;
 }
