@@ -26,12 +26,11 @@ const useUsersStore = create<UserState>()(
             try {
                 axios
                     .post(`${API_URL}/login`, {
-                        login: login,
+                        login,
                         password_hash: password,
-                        email: email,
+                        email,
                     })
-                    .then((response) => response.data)
-                    .then((data) => {
+                    .then(({data}) => {
                         if (data.access_token) {
                             localStorage.setItem("token", data.access_token);
                         }
@@ -51,16 +50,16 @@ const useUsersStore = create<UserState>()(
             try{
                 axios
                     .post(`${API_URL}/sign-up`, {
-                        login: login,
+                        login,
                         password_hash: password,
-                        email: email,
+                        email,
                     })
-                    .then((response) => response.data)
-                    .then((data) => {
-                        if (data.token) {
-                            localStorage.setItem("token", data.token);
+                    .then(({data}) => data)
+                    .then(({token}) => {
+                        if (token) {
+                            localStorage.setItem("token", token);
                             set({
-                                token: data.token,
+                                token,
                                 isAuthenticated: true
                             })
                         }
@@ -89,8 +88,7 @@ const useUsersStore = create<UserState>()(
                         Authorization: `Bearer ${token}`,
                     },
                 })
-                .then((response) => response.data)
-                .then((data) => {
+                .then(({data}) => {
                     set({
                         user:data
                     })
@@ -100,10 +98,10 @@ const useUsersStore = create<UserState>()(
         }
     }), {
             name: "auth-storage",
-            partialize: (state) => ({
-                user: state.user,
-                token: state.token,
-                isAuthenticated: state.isAuthenticated,
+            partialize: ({user, token, isAuthenticated}) => ({
+                user: user,
+                token: token,
+                isAuthenticated: isAuthenticated,
             }),
         }
     )

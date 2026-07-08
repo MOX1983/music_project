@@ -25,13 +25,10 @@ const useTrackStore = create<TrackState>()(
             getTracks: () => {
                 axios
                     .get(`${API_URL}/tracks`)
-                    .then((response) => response.data)
-                    .then((data) => {
-                        set({
-                            tracks: data,
-                            displayedTracks: data
-                        })
-                    })
+                    .then(({data}) => set({
+                        tracks: data,
+                        displayedTracks: data
+                    }))
                     .catch((error) => console.error("Error fetching tracks:", error));
 
                 return
@@ -66,8 +63,8 @@ const useTrackStore = create<TrackState>()(
         })),
         {
             name: "lastTrack",
-            partialize: (state) => ({
-                lastTrack: state.lastTrack
+            partialize: ({lastTrack}) => ({
+                lastTrack: lastTrack
             }),
         }
     )

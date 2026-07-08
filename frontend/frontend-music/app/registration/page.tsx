@@ -2,26 +2,17 @@
 
 import styles from "../../styles/styles.module.css";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Input from "@/components/Input";
 import useUsersStore from "@/stores/User";
 
 
 export default function Registration() {
-  const router = useRouter();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const {registration, isAuthenticated} = useUsersStore();
-
-
-  useEffect(() => {
-      if (isAuthenticated) {
-          router.push('/');
-      }
-  }, [isAuthenticated, router])
+  const {registration} = useUsersStore();
 
   const postRegistration = async () => {
       await registration(login, email, password);
