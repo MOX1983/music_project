@@ -5,18 +5,19 @@ import logoutImg from "@/public/img/Logout.svg";
 import Search from "@/components/Search";
 import styles from "@/app/styles.module.css";
 import Image from "next/image";
-import {Header as HeaderType} from "@/type/header";
 import {Track} from "@/type/tracks";
 import useUsersStore from "@/stores/User";
 import {useRouter} from "next/navigation";
+import useTrackStore from "@/stores/Track";
 
 const API_URL = "http://127.0.0.1:8000";
 
-export default function Header({tracks, onSearch}: HeaderType ) {
+export default function Header() {
 
     const router = useRouter();
 
     const {logout, isAuthenticated, user} = useUsersStore();
+    const {tracks, searchTracks} = useTrackStore();
 
     const handleExit = () => {
         logout();
@@ -25,7 +26,7 @@ export default function Header({tracks, onSearch}: HeaderType ) {
     };
 
     const handleSearch = (filtered: Track[] | null) => {
-        onSearch(filtered);
+        searchTracks(filtered);
     };
 
 

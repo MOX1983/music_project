@@ -1,14 +1,9 @@
-import {ChangeEvent} from "react";
+import {InputProps} from '@/type/inputProps'
 
-interface InputProps{
-    type: "text" |"password",
-    placeholder: string;
-    onChange: (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => void;
-}
 
 export default function Input({type, placeholder, onChange}:InputProps){
     return (<input
-        type={type}
+        type={type || "text"}
         placeholder={placeholder}
         onChange={onChange}
     ></input>)
