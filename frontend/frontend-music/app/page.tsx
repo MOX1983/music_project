@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import styles from "./styles.module.css";
 import plug from "../public/img/cat.jpg";
@@ -6,37 +6,23 @@ import Track from "../components/Track";
 import Header from "@/components/Header";
 import Playlist from "../components/Playlist";
 import Image from "next/image";
-import { useEffect } from "react";
 import {Track as TrackType} from "../type/tracks";
-import useUsersStore from "@/stores/User";
 import useTrackStore from "@/stores/Track";
+import useUsersStore from "@/stores/User";
+import {useEffect} from "react";
 
 const API_URL = "http://127.0.0.1:8000";
 
 export default function Main() {
-  const {me, token} = useUsersStore();
-  const {tracks, lastTrack, getLastTrack, getTracks, setLastTrack, searchTracks, displayedTracks} = useTrackStore();
-
-  useEffect(() => {
-
-    me(token || '');
-    getTracks();
-    getLastTrack();
-
-  }, []);
-
+  const { lastTrack, setLastTrack, displayedTracks, getTracks, getLastTrack} = useTrackStore();
 
   const handleTrack = (track: TrackType) => {
     setLastTrack(track);
   };
 
-  const handleSearch = (filtered: TrackType[] | null) => {
-    searchTracks(filtered);
-  };
-
   return (
     <div className={styles.body}>
-      <Header tracks={tracks}  onSearch={handleSearch} ></Header>
+      <Header></Header>
       <div className={styles.mainBody}>
         <div className="left-panel">
           <Playlist key={1} name={"name playlist"}></Playlist>
@@ -59,21 +45,23 @@ export default function Main() {
       </div>
 
       <div className="player">
-        {lastTrack ? (
-          <>
+        {lastTrack ? ( (() => {
+          const {picture, title, author, path_file} = lastTrack;
+          return (<>
             <img
-              className="img-m"
-              src={lastTrack.picture || plug.src}
-              alt={lastTrack.title}
-              width={50}
-              height={50}
+                className="img-m"
+                src={picture || plug.src}
+                alt={title}
+                width={50}
+                height={50}
             />
             <div className="track-info">
-              <p className="track-title">{lastTrack.title}</p>
-              <p className="track-author">{lastTrack.author}</p>
+              <p className="track-title">{title}</p>
+              <p className="track-author">{author}</p>
             </div>
-            <audio controls src={lastTrack.path_file} />
-          </>
+            <audio controls src={path_file} />
+          </>);
+            })()
         ) : (
           <>
             <Image
